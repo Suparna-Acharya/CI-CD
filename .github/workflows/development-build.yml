@@ -44,7 +44,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
           name: dev-artifact
-          path: /home/runner/work/CI-CD/CI-CD/publishdev/
+          path: /home/runner/work/CI-CD-NetCoreProj/CI-CD-NetCoreProj/publishdev/
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
