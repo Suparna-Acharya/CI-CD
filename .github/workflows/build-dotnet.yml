@@ -17,9 +17,22 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
+
     - name: Restore dependencies
+      if: steps.cachedotnet.outputs.cache-hit != 'true'
       run: dotnet restore
       
+    - name : Cache Dotnent Packages
+      id: cachedotnet
+      uses: actions/cache@v2
+      with:
+        path: | 
+         ~/.nuget/packages
+         !~/.nuget/packages/unwanted
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
     - name: Build
       run: dotnet build --no-restore
 
@@ -30,7 +43,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
           name: master-artifact
-          path: /home/runner/work/CI-CD/CI-CD/publish/
+          path: /home/runner/work/CI-CD-NetCoreProj/CI-CD-NetCoreProj/publish/
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
