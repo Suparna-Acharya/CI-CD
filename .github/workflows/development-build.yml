@@ -21,7 +21,7 @@ jobs:
 
     - name: Restore dependencies
       if: steps.cachedotnet.outputs.cache-hit != 'true'
-      run: dotnet restore
+      run: dotnet restore --packages .nuget
       
     - name : Cache Dotnent Packages
       id: cachedotnet
@@ -30,7 +30,7 @@ jobs:
         path: | 
          ~/.nuget/packages
          !~/.nuget/packages/unwanted
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        key: ${{ runner.os }}-nuget-
         restore-keys: |
           ${{ runner.os }}-nuget-
       
