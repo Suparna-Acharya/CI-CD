@@ -18,6 +18,10 @@ jobs:
       with:
         dotnet-version: 3.1.301
 
+    - name: Restore dependencies
+      if: steps.cachedotnet.outputs.cache-hit != 'true'
+      run: dotnet restore
+
     - name : Cache Dotnent Packages
       id: cachedotnet
       uses: actions/cache@v2
@@ -26,10 +30,6 @@ jobs:
         key: ${{ runner.os }}-nuget-
         restore-keys: |
           ${{ runner.os }}-nuget-
-
-    - name: Restore dependencies
-      if: steps.cachedotnet.outputs.cache-hit != 'true'
-      run: dotnet restore
 
     - name: Build
       run: dotnet build --no-restore
