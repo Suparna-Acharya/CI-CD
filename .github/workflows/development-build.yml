@@ -13,14 +13,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
+
     - name: Restore dependencies
+      if: steps.cachedotnet.outputs.cache-hit != 'true'
       run: dotnet restore
       
     - name : Cache Dotnent Packages
+      id: cachedotnet
       uses: actions/cache@v2
       with:
         path: | 
