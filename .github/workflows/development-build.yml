@@ -30,7 +30,7 @@ jobs:
         path: | 
          ~/.nuget/packages
          !~/.nuget/packages/unwanted
-        key: ${{ runner.os }}-nuget-
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
         restore-keys: |
           ${{ runner.os }}-nuget-
       
