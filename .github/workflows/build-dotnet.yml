@@ -22,10 +22,8 @@ jobs:
       id: cachedotnet
       uses: actions/cache@v2
       with:
-        path: | 
-         ~/.nuget/packages
-         !~/.nuget/packages/unwanted
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-
         restore-keys: |
           ${{ runner.os }}-nuget-
 
