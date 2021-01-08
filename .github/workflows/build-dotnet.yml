@@ -20,7 +20,7 @@ jobs:
 
     - name: Restore dependencies
       if: steps.cachedotnet.outputs.cache-hit != 'true'
-      run: dotnet restore --packages .nuget
+      run: dotnet restore --configfile NuGet.config --packages .nuget
 
     - name : Cache Dotnent Packages
       id: cachedotnet
