@@ -38,13 +38,13 @@ jobs:
       run: dotnet build --no-restore
 
     - name: Publish
-      run: dotnet publish --no-restore
+      run: dotnet publish -o publishdev --no-restore
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v2
       with:
           name: dev-artifact
-          path: /home/runner/work/CI-CD/CI-CD/CICDDemoNetCoreProj/bin/Debug/netcoreapp3.1/publish/
+          path: /home/runner/work/CI-CD/CI-CD/publishdev/
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
